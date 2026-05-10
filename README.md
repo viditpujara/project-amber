@@ -2,19 +2,31 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# Project Amber
 
-This contains everything you need to run your app locally.
+This repository contains the source code for **Project Amber**, featuring secure authentication, API key syncing, and an analytics dashboard.
 
-View your app in AI Studio: https://ai.studio/apps/eea9f590-09c9-4b0e-809c-a69ff996c78f
+**Live Deployment:** [https://prj-amber.vercel.app](https://prj-amber.vercel.app)
+
+## Features
+
+- **Supabase Authentication**: Secure session management and non-blocking profile synchronization.
+- **Gemini AI Integration**: Securely synchronizes user-specific Gemini API keys via the Supabase database.
+- **Dashboard Analytics**: Core UI layouts for displaying data.
+- **Modern UI/UX**: Custom SVG favicon and responsive core layouts.
 
 ## Run Locally
 
 **Prerequisites:**  Node.js
 
-
 1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+   ```bash
+   npm install
+   ```
+2. Set your environment variables in `.env`:
+   - `VITE_SUPABASE_URL`: Your Supabase Project URL.
+   - `VITE_SUPABASE_ANON_KEY`: Your Supabase Anon Public Key.
 3. Run the app:
-   `npm run dev`
+   ```bash
+   npm run dev
+   ```
