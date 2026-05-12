@@ -12,14 +12,25 @@ export default function Profile() {
   const handleSaveKey = async () => {
     if (!user) return;
     setIsSavingKey(true);
+    const trimmedKey = apiKey.trim();
+    console.log('[Profile] Saving API key. User ID:', user.id, '| Key starts with:', trimmedKey.slice(0, 8));
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('profiles')
-        .update({ gemini_api_key: apiKey.trim() })
-        .eq('id', user.id);
-        
-      if (error) throw error;
+        .update({ gemini_api_key: trimmedKey })
+        .eq('id', user.id)
+        .select('gemini_api_key')
+        .single();
+
+      if (error) {
+        console.error('[Profile] Update error:', error);
+        throw error;
+      }
+
+      console.log('[Profile] Update succeeded. Row returned:', data);
+
       await refreshProfile();
+      console.log('[Profile] refreshProfile() done. Context profile key starts with:', profile?.gemini_api_key?.slice(0, 8));
     } catch (error) {
       handleDatabaseError(error, OperationType.UPDATE, 'profiles');
     } finally {
